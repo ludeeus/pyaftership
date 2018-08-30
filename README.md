@@ -28,4 +28,18 @@ result = after_ship.get_trackings(api_key)
 
 # Print the result:
 print(result)
+
+# Add parcel information
+result = after_ship.add_tracking(api_key, slug, title, tracking_number)
+
+# Print the result:
+print(result)
+
+# Delete parcel information
+result = after_ship.delete_tracking(api_key, slug, tracking_number)
+
+# Print the result:
+print(result)
+
+
 ```

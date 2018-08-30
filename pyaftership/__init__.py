@@ -44,3 +44,15 @@ class AfterShip:
         except:
             tracking_info = {'success': False}
         return tracking_info
+
+    def delete_tracking(self, api_key, slug, tracking_number):
+        """Delete tracking information."""
+        tracking_info = {}
+        header = {'aftership-api-key': api_key, 'Content-Type':'application/json'}
+        url = self.BASE_URL + '/trackings/' + slug + '/' + tracking_number
+        try:
+            requests.delete(url, timeout=8, headers=header)
+            tracking_info = {'success': True}
+        except:
+            tracking_info = {'success': False}
+        return tracking_info
