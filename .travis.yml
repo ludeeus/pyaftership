@@ -1,0 +1,6 @@
+deploy:
+  provider: pypi
+  user: "ludeeus"
+  password: "$PYPIKEY"
+  on:
+    branch: master
