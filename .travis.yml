@@ -7,7 +7,7 @@ script:
 
 deploy:
   provider: pypi
-  user: "ludeeus"
+  user: "$PYPIUSER"
   password: "$PYPIKEY"
   on:
     branch: master
