@@ -8,6 +8,7 @@ matrix:
       after_success: coveralls
     - python: "3.6"
       env: PUBLISH=true
+  allow_failures:
     - python: "3.7"
       dist: xenial
 
