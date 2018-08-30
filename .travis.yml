@@ -5,8 +5,7 @@ python:
   - "3.7"
 
 script:
-  - pyton setup.py test
-
+  - python setup.py test
 
 deploy:
   provider: pypi
