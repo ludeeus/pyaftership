@@ -1,10 +1,10 @@
-"""Setup"""
+"""Setup."""
 import setuptools
 with open("README.md", "r") as fh:
     LONG = fh.read()
 setuptools.setup(
     name="pyaftership",
-    version="0.0.4",
+    version="0.0.5",
     author="Joakim Sorensen @ludeeus",
     author_email="ludeeus@gmail.com",
     description="A module to get information pending parcels.",

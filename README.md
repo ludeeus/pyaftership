@@ -1,5 +1,4 @@
-# pyaftership
-[![Build Status](https://travis-ci.org/ludeeus/pyaftership.svg?branch=master)](https://travis-ci.org/ludeeus/pyaftership)
+# pyaftership [![Build Status](https://travis-ci.org/ludeeus/pyaftership.svg?branch=master)](https://travis-ci.org/ludeeus/pyaftership)
 
 _A module to get information pending parcels._
 
@@ -34,6 +33,4 @@ result = after_ship.delete_tracking(api_key, slug, tracking_number)
 
 # Print the result:
 print(result)
-
-
 ```
