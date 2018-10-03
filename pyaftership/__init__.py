@@ -20,14 +20,14 @@ class AfterShip:
         """Get tracking information."""
         tracking_info = {}
         header = {'aftership-api-key': api_key,
-                  'Content-Type':'application/json'}
+                  'Content-Type': 'application/json'}
         fetchurl = self.BASE_URL + '/trackings'
         try:
             tracking_request = requests.get(fetchurl,
                                             timeout=8,
                                             headers=header).json()['data']
             tracking_info = {'success': True, 'data': tracking_request}
-        except:
+        except ConnectionError:
             tracking_info = {'success': False}
         return tracking_info
 
@@ -35,7 +35,7 @@ class AfterShip:
         """Add tracking information."""
         tracking_info = {}
         header = {'aftership-api-key': api_key,
-                  'Content-Type':'application/json'}
+                  'Content-Type': 'application/json'}
         url = self.BASE_URL + '/trackings'
         tracking = {
             'tracking': {
@@ -50,7 +50,7 @@ class AfterShip:
                           data=json.dumps(tracking),
                           headers=header)
             tracking_info = {'success': True}
-        except:
+        except ConnectionError:
             tracking_info = {'success': False}
         return tracking_info
 
@@ -58,11 +58,11 @@ class AfterShip:
         """Delete tracking information."""
         tracking_info = {}
         header = {'aftership-api-key': api_key,
-                  'Content-Type':'application/json'}
+                  'Content-Type': 'application/json'}
         url = self.BASE_URL + '/trackings/' + slug + '/' + tracking_number
         try:
             requests.delete(url, timeout=8, headers=header)
             tracking_info = {'success': True}
-        except:
+        except ConnectionError:
             tracking_info = {'success': False}
         return tracking_info
