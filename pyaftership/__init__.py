@@ -9,10 +9,11 @@ import json
 
 class AfterShip:
     """This class is used to get parcel information from Aftership."""
+
     BASE_URL = 'https://api.aftership.com/v4'
 
     def __init__(self):
-        """Initialize"""
+        """Initialize."""
 
     def get_trackings(self, api_key):
         """Get tracking information."""
