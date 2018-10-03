@@ -1,13 +1,7 @@
 # pyaftership
+[![Build Status](https://travis-ci.org/ludeeus/pyaftership.svg?branch=master)](https://travis-ci.org/ludeeus/pyaftership)
 
 _A module to get information pending parcels._
-
-## Notes
-
-This has been tested with python 3.6  
-This module uses these external libararies:
-
-- requests
 
 ## Install
 
