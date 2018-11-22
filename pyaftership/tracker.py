@@ -9,7 +9,7 @@ import logging
 import socket
 import aiohttp
 import async_timeout
-from pyaftership.const import URL, HEADERS
+from pyaftership.const import URL
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -22,31 +22,37 @@ class Tracking(object):
         self._loop = loop
         self._session = session
         self.api_key = api_key
-        self._pending_packages = {}
+        self._trackings = {}
 
-    async def get_pending_packages(self):
+    async def get_trackings(self):
         """Get tracking information."""
-        headers = HEADERS.format(api_key=self.api_key)
+        headers = {
+            'aftership-api-key': self.api_key,
+            'Content-Type': 'application/json'
+        }
         try:
             async with async_timeout.timeout(8, loop=self._loop):
                 response = await self._session.get(URL, headers=headers)
-                self._pending_packages = await response.json()
+                self._trackings = await response.json()
         except (asyncio.TimeoutError,
                 aiohttp.ClientError, socket.gaierror) as error:
             _LOGGER.error('Error connecting to AfterShip, %s', error)
-        return self._pending_packages
+        return self._trackings
 
-    async def add_package_tracking(self, tracking_number, title='Package',
+    async def add_package_tracking(self, tracking_number, title=None,
                                    slug=None):
         """Add tracking information."""
-        headers = HEADERS.format(api_key=self.api_key)
-        data = {
-            'tracking': {
-                'slug': slug,
-                'tracking_number': tracking_number,
-                'title': title
-            }
+        headers = {
+            'aftership-api-key': self.api_key,
+            'Content-Type': 'application/json'
         }
+        data = {}
+        data['tracking'] = {}
+        data['tracking']['tracking_number'] = tracking_number
+        if slug is not None:
+            data['tracking']['slug'] = slug
+        if title is not None:
+            data['tracking']['title'] = title
         try:
             async with async_timeout.timeout(8, loop=self._loop):
                 await self._session.post(URL, headers=headers, json=data)
@@ -56,7 +62,10 @@ class Tracking(object):
 
     async def remove_package_tracking(self, slug, tracking_number):
         """Delete tracking information."""
-        headers = HEADERS.format(api_key=self.api_key)
+        headers = {
+            'aftership-api-key': self.api_key,
+            'Content-Type': 'application/json'
+        }
         url = "{}/{}/{}".format(URL, slug, tracking_number)
         try:
             async with async_timeout.timeout(8, loop=self._loop):
@@ -66,6 +75,6 @@ class Tracking(object):
             _LOGGER.error('Error connecting to AfterShip, %s', error)
 
     @property
-    def pending_packages(self):
+    def trackings(self):
         """Return the device info if any."""
-        return self._pending_packages
+        return self._trackings

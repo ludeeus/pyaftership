@@ -10,7 +10,7 @@ async def example():
     """Get pending packages."""
     async with aiohttp.ClientSession() as session:
         pyaftership = Tracking(LOOP, session, API_KEY)
-        packages = await pyaftership.get_pending_packages()
+        packages = await pyaftership.get_trackings()
         print("Pending packages:", packages)
 
 
