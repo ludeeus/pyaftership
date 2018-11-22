@@ -1,6 +1,6 @@
-# pyaftership [![Build Status](https://travis-ci.org/ludeeus/pyaftership.svg?branch=master)](https://travis-ci.org/ludeeus/pyaftership)
+# pyaftership [![Build Status][travis_status]][travis] [![PyPI version][pypi_badge]][pypi]
 
-_A module to get information pending parcels._
+_Python wrapper package for the AfterShip API._
 
 ## Install
 
@@ -8,29 +8,9 @@ _A module to get information pending parcels._
 pip install pyaftership
 ```
 
-## Sample usage
+Look at the file `example.py` for a usage example.
 
-```python
-from pyaftership import AfterShip
-
-api_key = '9781915b342514bf0dede6e3d058a'
-after_ship = AfterShip()
-
-# Get parcel information:
-result = after_ship.get_trackings(api_key)
-
-# Print the result:
-print(result)
-
-# Add parcel information
-result = after_ship.add_tracking(api_key, slug, title, tracking_number)
-
-# Print the result:
-print(result)
-
-# Delete parcel information
-result = after_ship.delete_tracking(api_key, slug, tracking_number)
-
-# Print the result:
-print(result)
-```
+[travis_status]: https://travis-ci.org/ludeeus/pyaftership.svg?branch=master
+[travis]: https://travis-ci.com/ludeeus/pyaftership
+[pypi]:https://pypi.org/project/pyaftership/
+[pypi_badge]: https://badge.fury.io/py/pyaftership.svg
