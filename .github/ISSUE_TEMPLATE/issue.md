@@ -4,9 +4,6 @@ about: Create a report to help us improve
 
 ---
 
-**Version of the cutsom_component**
-<!-- If you are not using the latest version, download and try that before opening a issue-->
-
 **Describe the bug**
 A clear and concise description of what the bug is.
 
