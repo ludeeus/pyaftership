@@ -23,6 +23,7 @@ class Tracking(object):
         self._session = session
         self.api_key = api_key
         self._trackings = {}
+        self._meta = {}
 
     async def get_trackings(self):
         """Get tracking information."""
@@ -33,7 +34,18 @@ class Tracking(object):
         try:
             async with async_timeout.timeout(8, loop=self._loop):
                 response = await self._session.get(URL, headers=headers)
-                self._trackings = await response.json()
+                result = await response.json()
+                try:
+                    if response.ok:
+                        self._trackings = result['data']
+                    else:
+                        _LOGGER.error("Error code %s - %s",
+                                      result['meta']['code'],
+                                      result['meta']['message'])
+                    self._meta = result['meta']
+                except (TypeError, KeyError) as error:
+                    _LOGGER.error('Error parsing data from AfterShip, %s',
+                                  error)
         except (asyncio.TimeoutError,
                 aiohttp.ClientError, socket.gaierror) as error:
             _LOGGER.error('Error connecting to AfterShip, %s', error)
@@ -76,5 +88,10 @@ class Tracking(object):
 
     @property
     def trackings(self):
-        """Return the device info if any."""
+        """Return all trackings."""
         return self._trackings
+
+    @property
+    def meta(self):
+        """Return the last meta response."""
+        return self._meta
