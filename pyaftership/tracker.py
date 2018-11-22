@@ -65,7 +65,6 @@ class Tracking(object):
                 aiohttp.ClientError, socket.gaierror) as error:
             _LOGGER.error('Error connecting to AfterShip, %s', error)
 
-
     @property
     def pending_packages(self):
         """Return the device info if any."""
