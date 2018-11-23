@@ -9,7 +9,7 @@ import logging
 import socket
 import aiohttp
 import async_timeout
-from pyaftership.const import URL
+from pyaftership.const import URL, GOOD_HTTP_CODES
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -36,7 +36,7 @@ class Tracking(object):
                 response = await self._session.get(URL, headers=headers)
                 result = await response.json()
                 try:
-                    if response.ok:
+                    if response.status in GOOD_HTTP_CODES:
                         self._trackings = result['data']
                     else:
                         _LOGGER.error("Error code %s - %s",
