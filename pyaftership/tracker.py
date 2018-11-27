@@ -27,6 +27,8 @@ class Tracking(object):
 
     async def get_trackings(self):
         """Get tracking information."""
+        self._trackings = {}
+        self._meta = {}
         headers = {
             'aftership-api-key': self.api_key,
             'Content-Type': 'application/json'
