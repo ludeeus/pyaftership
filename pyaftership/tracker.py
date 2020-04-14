@@ -54,7 +54,7 @@ class Tracking(object):
         return self._trackings
 
     async def add_package_tracking(self, tracking_number, title=None,
-                                   slug=None):
+                                   slug=None, tracking_postal_code=None):
         """Add tracking information."""
         headers = {
             'aftership-api-key': self.api_key,
@@ -67,6 +67,8 @@ class Tracking(object):
             data['tracking']['slug'] = slug
         if title is not None:
             data['tracking']['title'] = title
+        if tracking_postal_code is not None:
+            data['tracking']['tracking_postal_code'] = tracking_postal_code
         try:
             async with async_timeout.timeout(8, loop=self._loop):
                 await self._session.post(URL, headers=headers, json=data)
