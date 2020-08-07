@@ -105,7 +105,8 @@ class Tracking(object):
         couriers = {}
         try:
             async with async_timeout.timeout(8, loop=self._loop):
-                response = await self._session.post(url, headers=headers, json=data)
+                response = await self._session.post(url, headers=headers,
+                                                    json=data)
                 result = await response.json()
                 try:
                     if response.status in GOOD_HTTP_CODES:
@@ -117,7 +118,7 @@ class Tracking(object):
                 except (TypeError, KeyError) as error:
                     _LOGGER.error('Error parsing data from AfterShip, %s',
                                   error)
-        except (asyncio.TimeoutError, 
+        except (asyncio.TimeoutError,
                 aiohttp.ClientError, socket.gaierror) as error:
             _LOGGER.error('Error connecting to Aftership, %s', error)
         return couriers
