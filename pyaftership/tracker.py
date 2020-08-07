@@ -33,9 +33,10 @@ class Tracking(object):
             'aftership-api-key': self.api_key,
             'Content-Type': 'application/json'
         }
+        url = "{}/trackings".format(URL)
         try:
             async with async_timeout.timeout(8, loop=self._loop):
-                response = await self._session.get(URL, headers=headers)
+                response = await self._session.get(url, headers=headers)
                 result = await response.json()
                 try:
                     if response.status in GOOD_HTTP_CODES:
@@ -60,6 +61,7 @@ class Tracking(object):
             'aftership-api-key': self.api_key,
             'Content-Type': 'application/json'
         }
+        url = "{}/trackings".format(URL)
         data = {}
         data['tracking'] = {}
         data['tracking']['tracking_number'] = tracking_number
@@ -71,7 +73,7 @@ class Tracking(object):
             data['tracking']['tracking_postal_code'] = tracking_postal_code
         try:
             async with async_timeout.timeout(8, loop=self._loop):
-                await self._session.post(URL, headers=headers, json=data)
+                await self._session.post(url, headers=headers, json=data)
         except (asyncio.TimeoutError,
                 aiohttp.ClientError, socket.gaierror) as error:
             _LOGGER.error('Error connecting to AfterShip, %s', error)
@@ -82,13 +84,43 @@ class Tracking(object):
             'aftership-api-key': self.api_key,
             'Content-Type': 'application/json'
         }
-        url = "{}/{}/{}".format(URL, slug, tracking_number)
+        url = "{}/trackings/{}/{}".format(URL, slug, tracking_number)
         try:
             async with async_timeout.timeout(8, loop=self._loop):
                 await self._session.delete(url, headers=headers)
         except (asyncio.TimeoutError,
                 aiohttp.ClientError, socket.gaierror) as error:
             _LOGGER.error('Error connecting to AfterShip, %s', error)
+
+    async def detect_couriers_for_tracking_number(self, tracking_number):
+        """Detect couriers for tracking number."""
+        headers = {
+            'aftership-api-key': self.api_key,
+            'Content-Type': 'application/json'
+        }
+        url = "{}/couriers/detect".format(URL)
+        data = {}
+        data['tracking'] = {}
+        data['tracking']['tracking_number'] = tracking_number
+        couriers = {}
+        try:
+            async with async_timeout.timeout(8, loop=self._loop):
+                response = await self._session.post(url, headers=headers, json=data)
+                result = await response.json()
+                try:
+                    if response.status in GOOD_HTTP_CODES:
+                        couriers = result['data']
+                    else:
+                        _LOGGER.error("Error code %s - %s",
+                                      result['meta']['code'],
+                                      result['meta']['message'])
+                except (TypeError, KeyError) as error:
+                    _LOGGER.error('Error parsing data from AfterShip, %s',
+                                  error)
+        except (asyncio.TimeoutError, 
+                aiohttp.ClientError, socket.gaierror) as error:
+            _LOGGER.error('Error connecting to Aftership, %s', error)
+        return couriers
 
     @property
     def trackings(self):
