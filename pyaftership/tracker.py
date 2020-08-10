@@ -92,15 +92,22 @@ class Tracking(object):
                 aiohttp.ClientError, socket.gaierror) as error:
             _LOGGER.error('Error connecting to AfterShip, %s', error)
 
-    async def detect_couriers_for_tracking_number(self, tracking_number):
-        """Detect couriers for tracking number."""
+    async def detect_couriers_for_tracking_number(self, tracking_number,
+                                                  **kwargs):
+        """
+        Detect couriers for tracking number.
+
+        Add any optional parameters as kwargs when calling the method.
+        An overview can be found at
+        https://docs.aftership.com/api/4/couriers/post-couriers-detect
+        """
         headers = {
             'aftership-api-key': self.api_key,
             'Content-Type': 'application/json'
         }
         url = "{}/couriers/detect".format(URL)
         data = {}
-        data['tracking'] = {}
+        data['tracking'] = kwargs
         data['tracking']['tracking_number'] = tracking_number
         couriers = {}
         try:
