@@ -17,7 +17,7 @@ setup(
         "Programming Language :: Python :: 3.9",
         "Topic :: Software Development :: Libraries :: Python Modules",
     ],
-    description="",
+    description="Async Python wrapper for the AfterShip API.",
     install_requires=["aiohttp>=3.6.1,<4.0", "async_timeout"],
     license="MIT license",
     long_description_content_type="text/markdown",
@@ -25,5 +25,5 @@ setup(
     name="pyaftership",
     packages=find_packages(include=["pyaftership", "pyaftership.*"]),
     url="https://github.com/ludeeus/pyaftership",
-    version="master",
+    version="main",
 )

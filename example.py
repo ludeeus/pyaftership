@@ -25,6 +25,5 @@ async def detect_couriers_example():
         print("Possible couriers:", couriers)
 
 
-LOOP = asyncio.get_event_loop()
-LOOP.run_until_complete(example())
-LOOP.run_until_complete(detect_couriers_example())
+asyncio.get_event_loop().run_until_complete(example())
+asyncio.get_event_loop().run_until_complete(detect_couriers_example())
