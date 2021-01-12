@@ -1,22 +1,29 @@
 """Setup configuration."""
-import setuptools
+from setuptools import setup, find_packages
 
-with open("README.md", "r") as fh:
-    LONG = fh.read()
-setuptools.setup(
-    name="pyaftership",
-    version="0.1.2",
-    author="Joakim Sorensen",
-    author_email="ludeeus@gmail.com",
-    description="",
-    long_description=LONG,
-    install_requires=['aiohttp', 'async_timeout'],
-    long_description_content_type="text/markdown",
-    url="https://github.com/ludeeus/pyaftership",
-    packages=setuptools.find_packages(),
-    classifiers=(
-        "Programming Language :: Python :: 3",
+with open("README.md") as readme_file:
+    readme = readme_file.read()
+
+setup(
+    author="Ludeeus",
+    author_email="hi@ludeeus.dev",
+    classifiers=[
+        "Intended Audience :: Developers",
         "License :: OSI Approved :: MIT License",
-        "Operating System :: OS Independent",
-    ),
+        "Natural Language :: English",
+        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
+        "Topic :: Software Development :: Libraries :: Python Modules",
+    ],
+    description="",
+    install_requires=["aiohttp>=3.6.1,<4.0", "async_timeout"],
+    license="MIT license",
+    long_description_content_type="text/markdown",
+    long_description=readme,
+    name="pyaftership",
+    packages=find_packages(include=["pyaftership", "pyaftership.*"]),
+    url="https://github.com/ludeeus/pyaftership",
+    version="master",
 )

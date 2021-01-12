@@ -1,0 +1,13 @@
+[run]
+source = pyaftership
+
+omit =
+    # omit setup
+    setup.py
+
+    # omit tests
+    tests/*
+
+[report]
+exclude_lines =
+    if TYPE_CHECKING:
