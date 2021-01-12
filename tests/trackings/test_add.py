@@ -22,6 +22,9 @@ async def test_add(aresponses):
     async with aiohttp.ClientSession() as session:
         aftership = AfterShip(API_KEY, session)
         trackings = await aftership.trackings.add_tracking(
-            tracking_number="1111111111111"
+            tracking_number="1111111111111",
+            slug="fedex",
+            title="sample",
+            tracking_postal_code=2223,
         )
         assert trackings["tracking"]["tracking_number"] == "1111111111111"

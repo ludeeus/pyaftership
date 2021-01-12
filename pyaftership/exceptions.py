@@ -5,5 +5,5 @@ class AfterShipException(Exception):
     """Base exception for AfterShip."""
 
 
-class AfterShipCommunicationException(Exception):
+class AfterShipCommunicationException(AfterShipException):
     """Communication exception for AfterShip."""

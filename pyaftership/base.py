@@ -2,13 +2,12 @@
 import asyncio
 from socket import gaierror
 from typing import Optional, TYPE_CHECKING
-from aiohttp.client import request
 
 import async_timeout
 from aiohttp import ClientError, ClientResponse, ClientSession
 
 from .const import BASE_URL, GOOD_HTTP_CODES
-from .exceptions import AfterShipCommunicationException, AfterShipException
+from .exceptions import AfterShipCommunicationException
 
 if TYPE_CHECKING:
     from .trackings import AfterShipTrackings
@@ -49,14 +48,12 @@ class AfterShipBase:
 
     async def _handle_response(self, response: ClientResponse) -> Optional[dict]:
         """Private method handle the result from AfterShip."""
-        if not response:
-            raise AfterShipException()
+        result = await response.json() if response else {}
 
         if response.status not in GOOD_HTTP_CODES:
-            meta = response.get("meta", {})
+            meta = result.get("meta", {})
             raise AfterShipCommunicationException(
                 f"{response.status} is not valid - {meta.get('code')} - {meta.get('message')}"
             )
 
-        result = await response.json()
         return result.get("data", {})

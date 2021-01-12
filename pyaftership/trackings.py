@@ -18,7 +18,7 @@ class AfterShipTrackings(AfterShipBase):
         tracking_number: str,
         title: str = None,
         slug: str = None,
-        tracking_postal_code: str = None,
+        tracking_postal_code: any = None,
     ):
         """
         Add tracking information.
