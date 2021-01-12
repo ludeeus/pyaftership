@@ -2,6 +2,8 @@
 import json
 import os
 
+API_KEY = "XXXXXXXX0000000000XXXXXXXX0000000XXXXX000"
+
 
 def load_fixture(filename, asjson=False):
     """Load a fixture."""

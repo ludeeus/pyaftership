@@ -1,13 +1,16 @@
 """AfterShip Base."""
 import asyncio
 from socket import gaierror
-from typing import Optional
+from typing import Optional, TYPE_CHECKING
 
 import async_timeout
 from aiohttp import ClientError, ClientResponse, ClientSession
 
 from .const import BASE_URL
 from .exceptions import AfterShipCommunicationException
+
+if TYPE_CHECKING:
+    from .trackings import AfterShipTrackings
 
 
 class AfterShipBase:
@@ -16,6 +19,7 @@ class AfterShipBase:
     _api_key: str
     _session: ClientSession
     _timeout: int
+    _trackings: Optional["AfterShipTrackings"]
 
     async def _call_api(
         self, endpoint: str, post: bool = False, data: Optional[dict] = None

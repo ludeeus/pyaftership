@@ -1,5 +1,6 @@
 """Main AfterShip object."""
 
+from typing import Optional
 from aiohttp import ClientSession
 
 from .base import AfterShipBase
@@ -11,8 +12,8 @@ class AfterShip(AfterShipBase):
 
     def __init__(self, api_key: str, session: ClientSession, timeout: int = 10) -> None:
         """Initialize."""
-        self._api_key = api_key
-        self._session = session
-        self._timeout = timeout
+        AfterShipBase._api_key = api_key
+        AfterShipBase._session = session
+        AfterShipBase._timeout = timeout
 
         self.trackings = AfterShipTrackings()
