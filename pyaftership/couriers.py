@@ -5,7 +5,7 @@ from .base import AfterShipBase
 class AfterShipCouriers(AfterShipBase):
     """AfterShip Couriers object."""
 
-    async def detect(self, tracking_number: str, **kwargs):
+    async def detect(self, tracking_number: str, **kwargs) -> dict:
         """
         Detect couriers for tracking number.
 

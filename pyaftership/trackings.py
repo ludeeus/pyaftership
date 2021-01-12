@@ -5,7 +5,7 @@ from .base import AfterShipBase
 class AfterShipTrackings(AfterShipBase):
     """AfterShip Trackings object."""
 
-    async def list(self):
+    async def list(self) -> dict:
         """
         List tracking information.
 
@@ -19,7 +19,7 @@ class AfterShipTrackings(AfterShipBase):
         title: str = None,
         slug: str = None,
         tracking_postal_code: any = None,
-    ):
+    ) -> dict:
         """
         Add tracking information.
 
@@ -39,7 +39,7 @@ class AfterShipTrackings(AfterShipBase):
 
         return await self._call_api("trackings", method="POST", data=data)
 
-    async def remove(self, tracking_number: str, slug: str):
+    async def remove(self, tracking_number: str, slug: str) -> dict:
         """
         Add tracking information.
 
