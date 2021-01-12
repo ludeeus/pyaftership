@@ -22,13 +22,13 @@ import asyncio
 import aiohttp
 from pyaftership import AfterShip
 
-API_KEY = 'JFNDKUS73438798FJH38Y9FHH38F9FHQO789'
+API_KEY = 'XXXXXXXX0000000000XXXXXXXX0000000XXXXX000'
 
 
 async def example():
     """Get pending packages."""
     async with aiohttp.ClientSession() as session:
-        aftership = AfterShip(session, API_KEY)
+        aftership = AfterShip(API_KEY, session)
         packages = await aftership.get_trackings()
         print("Pending packages:", packages)
 
