@@ -1,4 +1,4 @@
-"""Test delete tracking."""
+"""Test remove tracking."""
 import aiohttp
 import pytest
 
@@ -7,8 +7,8 @@ from tests.common import API_KEY, load_fixture
 
 
 @pytest.mark.asyncio
-async def test_delete_tracking(aresponses):
-    """Test delete tracking."""
+async def test_remove(aresponses):
+    """Test remove tracking."""
     aresponses.add(
         "api.aftership.com",
         "/v4/trackings/fedex/772857780801111",

@@ -7,7 +7,7 @@ from tests.common import API_KEY, load_fixture
 
 
 @pytest.mark.asyncio
-async def test_list_trackings(aresponses):
+async def test_list(aresponses):
     """Test list trackings."""
     aresponses.add(
         "api.aftership.com",

@@ -1,28 +1,17 @@
 """AfterShip Trackings object."""
-
 from .base import AfterShipBase
-from .const import GOOD_HTTP_CODES
-from .exceptions import AfterShipCommunicationException, AfterShipException
 
 
 class AfterShipTrackings(AfterShipBase):
     """AfterShip Trackings object."""
 
     async def list_trackings(self):
-        """List tracking information."""
-        response = await self._call_api("trackings")
+        """
+        List tracking information.
 
-        if not response:
-            raise AfterShipException()
-
-        if response.status not in GOOD_HTTP_CODES:
-            meta = response.get("meta", {})
-            raise AfterShipCommunicationException(
-                f"{response.status} is not valid - {meta.get('code')} - {meta.get('message')}"
-            )
-
-        result = await response.json()
-        return result.get("data", {})
+        https://docs.aftership.com/api/4/trackings/get-trackings
+        """
+        return await self._call_api("trackings")
 
     async def add_tracking(
         self,
@@ -31,7 +20,11 @@ class AfterShipTrackings(AfterShipBase):
         slug: str = None,
         tracking_postal_code: str = None,
     ):
-        """Add tracking information."""
+        """
+        Add tracking information.
+
+        https://docs.aftership.com/api/4/trackings/post-trackings
+        """
 
         data = {"tracking": {"tracking_number": tracking_number}}
 
@@ -44,37 +37,16 @@ class AfterShipTrackings(AfterShipBase):
         if tracking_postal_code is not None:
             data["tracking"]["tracking_postal_code"] = tracking_postal_code
 
-        response = await self._call_api("trackings", method="POST", data=data)
-
-        if not response:
-            raise AfterShipException()
-
-        if response.status not in GOOD_HTTP_CODES:
-            meta = response.get("meta", {})
-            raise AfterShipCommunicationException(
-                f"{response.status} is not valid - {meta.get('code')} - {meta.get('message')}"
-            )
-
-        result = await response.json()
-        return result.get("data", {})
+        return await self._call_api("trackings", method="POST", data=data)
 
     async def remove_tracking(self, tracking_number: str, slug: str):
-        """Add tracking information."""
+        """
+        Add tracking information.
 
-        data = {"tracking": {"tracking_number": tracking_number}}
-
-        response = await self._call_api(
-            f"trackings/{slug}/{tracking_number}", method="DELETE", data=data
+        https://docs.aftership.com/api/4/trackings/delete-trackings
+        """
+        return await self._call_api(
+            f"trackings/{slug}/{tracking_number}",
+            method="DELETE",
+            data={"tracking": {"tracking_number": tracking_number}},
         )
-
-        if not response:
-            raise AfterShipException()
-
-        if response.status not in GOOD_HTTP_CODES:
-            meta = response.get("meta", {})
-            raise AfterShipCommunicationException(
-                f"{response.status} is not valid - {meta.get('code')} - {meta.get('message')}"
-            )
-
-        result = await response.json()
-        return result.get("data", {})

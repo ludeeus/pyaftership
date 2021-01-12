@@ -1,5 +1,6 @@
 """Main AfterShip object."""
 
+from pyaftership.couriers import AfterShipCouriers
 from typing import Optional
 from aiohttp import ClientSession
 
@@ -17,3 +18,4 @@ class AfterShip(AfterShipBase):
         AfterShipBase._timeout = timeout
 
         self.trackings = AfterShipTrackings()
+        self.couriers = AfterShipCouriers()
