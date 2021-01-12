@@ -44,7 +44,28 @@ class AfterShipTrackings(AfterShipBase):
         if tracking_postal_code is not None:
             data["tracking"]["tracking_postal_code"] = tracking_postal_code
 
-        response = await self._call_api("trackings", post=True, data=data)
+        response = await self._call_api("trackings", method="POST", data=data)
+
+        if not response:
+            raise AfterShipException()
+
+        if response.status not in GOOD_HTTP_CODES:
+            meta = response.get("meta", {})
+            raise AfterShipCommunicationException(
+                f"{response.status} is not valid - {meta.get('code')} - {meta.get('message')}"
+            )
+
+        result = await response.json()
+        return result.get("data", {})
+
+    async def remove_tracking(self, tracking_number: str, slug: str):
+        """Add tracking information."""
+
+        data = {"tracking": {"tracking_number": tracking_number}}
+
+        response = await self._call_api(
+            f"trackings/{slug}/{tracking_number}", method="DELETE", data=data
+        )
 
         if not response:
             raise AfterShipException()

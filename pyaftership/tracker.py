@@ -27,30 +27,6 @@ class Tracking(object):
         self._trackings = {}
         self._meta = {}
 
-    async def add_package_tracking(
-        self, tracking_number, title=None, slug=None, tracking_postal_code=None
-    ):
-        """Add tracking information."""
-        headers = {
-            "aftership-api-key": self.api_key,
-            "Content-Type": "application/json",
-        }
-        url = "{}/trackings".format(URL)
-        data = {}
-        data["tracking"] = {}
-        data["tracking"]["tracking_number"] = tracking_number
-        if slug is not None:
-            data["tracking"]["slug"] = slug
-        if title is not None:
-            data["tracking"]["title"] = title
-        if tracking_postal_code is not None:
-            data["tracking"]["tracking_postal_code"] = tracking_postal_code
-        try:
-            async with async_timeout.timeout(8, loop=self._loop):
-                await self._session.post(url, headers=headers, json=data)
-        except (asyncio.TimeoutError, aiohttp.ClientError, socket.gaierror) as error:
-            _LOGGER.error("Error connecting to AfterShip, %s", error)
-
     async def remove_package_tracking(self, slug, tracking_number):
         """Delete tracking information."""
         headers = {
@@ -99,13 +75,3 @@ class Tracking(object):
         except (asyncio.TimeoutError, aiohttp.ClientError, socket.gaierror) as error:
             _LOGGER.error("Error connecting to Aftership, %s", error)
         return couriers
-
-    @property
-    def trackings(self):
-        """Return all trackings."""
-        return self._trackings
-
-    @property
-    def meta(self):
-        """Return the last meta response."""
-        return self._meta

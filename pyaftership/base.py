@@ -22,13 +22,13 @@ class AfterShipBase:
     _trackings: Optional["AfterShipTrackings"]
 
     async def _call_api(
-        self, endpoint: str, post: bool = False, data: Optional[dict] = None
+        self, endpoint: str, method: str = "GET", data: Optional[dict] = None
     ) -> Optional[ClientResponse]:
         """Private method to call the AfterShip API."""
         try:
             async with async_timeout.timeout(self._timeout):
                 return await self._session.request(
-                    method="POST" if post else "GET",
+                    method=method,
                     url=f"{BASE_URL}/{endpoint}",
                     headers={
                         "aftership-api-key": self._api_key,
