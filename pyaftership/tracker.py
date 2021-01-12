@@ -27,35 +27,6 @@ class Tracking(object):
         self._trackings = {}
         self._meta = {}
 
-    async def get_trackings(self):
-        """Get tracking information."""
-        self._trackings = {}
-        self._meta = {}
-        headers = {
-            "aftership-api-key": self.api_key,
-            "Content-Type": "application/json",
-        }
-        url = "{}/trackings".format(URL)
-        try:
-            async with async_timeout.timeout(8, loop=self._loop):
-                response = await self._session.get(url, headers=headers)
-                result = await response.json()
-                try:
-                    if response.status in GOOD_HTTP_CODES:
-                        self._trackings = result["data"]
-                    else:
-                        _LOGGER.error(
-                            "Error code %s - %s",
-                            result["meta"]["code"],
-                            result["meta"]["message"],
-                        )
-                    self._meta = result["meta"]
-                except (TypeError, KeyError) as error:
-                    _LOGGER.error("Error parsing data from AfterShip, %s", error)
-        except (asyncio.TimeoutError, aiohttp.ClientError, socket.gaierror) as error:
-            _LOGGER.error("Error connecting to AfterShip, %s", error)
-        return self._trackings
-
     async def add_package_tracking(
         self, tracking_number, title=None, slug=None, tracking_postal_code=None
     ):

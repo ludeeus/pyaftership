@@ -29,7 +29,7 @@ async def example():
     """Get pending packages."""
     async with aiohttp.ClientSession() as session:
         aftership = AfterShip(API_KEY, session)
-        packages = await aftership.get_trackings()
+        packages = await aftership.trackings.get_trackings()
         print("Pending packages:", packages)
 
 asyncio.get_event_loop().run_until_complete(example())
