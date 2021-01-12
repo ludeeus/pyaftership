@@ -1,0 +1,13 @@
+{
+    "meta": {
+        "code": 4003,
+        "message": "Tracking number already exists.",
+        "type": "BadRequest"
+    },
+    "data": {
+        "tracking": {
+            "tracking_number": "RA123456789HK",
+            "slug": "hong-kong-post"
+        }
+    }
+}
