@@ -1,9 +1,11 @@
 """Example usage of pyaftership."""
 import asyncio
+
 import aiohttp
+
 from pyaftership.tracker import Tracking
 
-API_KEY = 'JFNDKUS73438798FJH38Y9FHH38F9FHQO789'
+API_KEY = "JFNDKUS73438798FJH38Y9FHH38F9FHQO789"
 
 
 async def example():
