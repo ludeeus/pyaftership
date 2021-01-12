@@ -21,7 +21,7 @@ async def test_remove(aresponses):
     )
     async with aiohttp.ClientSession() as session:
         aftership = AfterShip(API_KEY, session)
-        trackings = await aftership.trackings.remove_tracking(
+        trackings = await aftership.trackings.remove(
             tracking_number="772857780801111", slug="fedex"
         )
         assert trackings["tracking"]["tracking_number"] == "772857780801111"

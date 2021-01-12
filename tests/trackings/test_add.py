@@ -21,7 +21,7 @@ async def test_add(aresponses):
     )
     async with aiohttp.ClientSession() as session:
         aftership = AfterShip(API_KEY, session)
-        trackings = await aftership.trackings.add_tracking(
+        trackings = await aftership.trackings.add(
             tracking_number="1111111111111",
             slug="fedex",
             title="sample",

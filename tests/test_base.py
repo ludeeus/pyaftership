@@ -22,7 +22,7 @@ async def test_base_none_valid_code(aresponses):
     async with aiohttp.ClientSession() as session:
         aftership = AfterShip(API_KEY, session)
         with pytest.raises(AfterShipException):
-            await aftership.trackings.list_trackings()
+            await aftership.trackings.list()
 
 
 @pytest.mark.asyncio
@@ -31,8 +31,8 @@ async def test_base_exceptions(aresponses):
     async with aiohttp.ClientSession() as session:
         aftership = AfterShip(API_KEY, session)
         with pytest.raises(AfterShipException):
-            await aftership.trackings.list_trackings()
+            await aftership.trackings.list()
 
         aftership = AfterShip(API_KEY, session, 0)
         with pytest.raises(AfterShipException):
-            await aftership.trackings.list_trackings()
+            await aftership.trackings.list()

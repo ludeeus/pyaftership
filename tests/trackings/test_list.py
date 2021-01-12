@@ -21,6 +21,6 @@ async def test_list(aresponses):
     )
     async with aiohttp.ClientSession() as session:
         aftership = AfterShip(API_KEY, session)
-        trackings = await aftership.trackings.list_trackings()
+        trackings = await aftership.trackings.list()
         assert trackings["count"] != 0
         assert trackings["count"] == len(trackings["trackings"])
