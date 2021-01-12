@@ -26,11 +26,11 @@ API_KEY = 'XXXXXXXX0000000000XXXXXXXX0000000XXXXX000'
 
 
 async def example():
-    """Get pending packages."""
+    """Get trackings."""
     async with aiohttp.ClientSession() as session:
         aftership = AfterShip(API_KEY, session)
-        packages = await aftership.trackings.get_trackings()
-        print("Pending packages:", packages)
+        trackings = await aftership.trackings.list_trackings()
+        print("Pending trackings:", trackings["trackings"])
 
 asyncio.get_event_loop().run_until_complete(example())
 ```
