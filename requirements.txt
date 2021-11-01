@@ -1,4 +1,4 @@
-black==21.9b0
+black==21.10b0
 aiohttp>=3.6.1,<4.0
 async_timeout==3.0.1
 aresponses==2.1.4
