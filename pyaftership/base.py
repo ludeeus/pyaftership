@@ -1,7 +1,7 @@
 """AfterShip Base."""
 import asyncio
 from socket import gaierror
-from typing import Optional, TYPE_CHECKING
+from typing import TYPE_CHECKING, Optional
 
 import async_timeout
 from aiohttp import ClientError, ClientResponse, ClientSession
