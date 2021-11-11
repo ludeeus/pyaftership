@@ -1,8 +1,10 @@
 """Main AfterShip object."""
 
-from pyaftership.couriers import AfterShipCouriers
 from typing import Optional
+
 from aiohttp import ClientSession
+
+from pyaftership.couriers import AfterShipCouriers
 
 from .base import AfterShipBase
 from .trackings import AfterShipTrackings
