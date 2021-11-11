@@ -18,7 +18,7 @@ setup(
         "Topic :: Software Development :: Libraries :: Python Modules",
     ],
     description="Async Python wrapper for the AfterShip API.",
-    install_requires=["aiohttp>=3.6.1,<4.0", "async_timeout"],
+    install_requires=["aiohttp>=3.6.1,<4.0"],
     license="MIT license",
     long_description_content_type="text/markdown",
     long_description=readme,
