@@ -1,7 +1,7 @@
 # pyaftership
 
 [![codecov](https://codecov.io/gh/ludeeus/pyaftership/branch/main/graph/badge.svg)](https://codecov.io/gh/ludeeus/pyaftership)
-![python version](https://img.shields.io/badge/Python-3.7=><=3.11-dev-blue.svg)
+![python version](https://img.shields.io/badge/Python-3.7=><=3.10-blue.svg)
 [![PyPI](https://img.shields.io/pypi/v/pyaftership)](https://pypi.org/project/pyaftership)
 ![Actions](https://github.com/ludeeus/pyaftership/workflows/Actions/badge.svg?branch=main)
 
