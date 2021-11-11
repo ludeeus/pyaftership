@@ -3,8 +3,7 @@ import asyncio
 from socket import gaierror
 from typing import Optional, TYPE_CHECKING
 
-import async_timeout
-from aiohttp import ClientError, ClientResponse, ClientSession
+from aiohttp import ClientError, ClientResponse, ClientSession, ClientTimeout
 
 from .const import BASE_URL, GOOD_HTTP_CODES
 from .exceptions import AfterShipCommunicationException
@@ -26,17 +25,17 @@ class AfterShipBase:
     ) -> Optional[ClientResponse]:
         """Private method to call the AfterShip API."""
         try:
-            async with async_timeout.timeout(self._timeout):
-                response = await self._session.request(
-                    method=method,
-                    url=f"{BASE_URL}/{endpoint}",
-                    headers={
-                        "aftership-api-key": self._api_key,
-                        "Content-Type": "application/json",
-                    },
-                    json=data,
-                )
-                return await self._handle_response(response)
+            response = await self._session.request(
+                method=method,
+                url=f"{BASE_URL}/{endpoint}",
+                headers={
+                    "aftership-api-key": self._api_key,
+                    "Content-Type": "application/json",
+                },
+                json=data,
+                timeout=ClientTimeout(total=self._timeout),
+            )
+            return await self._handle_response(response)
 
         except asyncio.TimeoutError as exception:
             raise AfterShipCommunicationException("Timeout error") from exception
