@@ -1,7 +1,8 @@
 """Test base."""
 import aiohttp
 import pytest
-
+import asyncio
+from unittest.mock import patch
 from pyaftership import AfterShip, AfterShipException
 from tests.common import API_KEY, load_fixture
 
@@ -34,5 +35,9 @@ async def test_base_exceptions(aresponses):
             await aftership.trackings.list()
 
         aftership = AfterShip(API_KEY, session, 0)
-        with pytest.raises(AfterShipException):
-            await aftership.trackings.list()
+        with patch(
+            "pyaftership.base.AfterShipBase._session.request",
+            side_effect=asyncio.TimeoutError,
+        ):
+            with pytest.raises(AfterShipException):
+                await aftership.trackings.list()
