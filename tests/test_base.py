@@ -1,8 +1,10 @@
 """Test base."""
-import aiohttp
-import pytest
 import asyncio
 from unittest.mock import patch
+
+import aiohttp
+import pytest
+
 from pyaftership import AfterShip, AfterShipException
 from tests.common import API_KEY, load_fixture
 
