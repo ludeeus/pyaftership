@@ -18,6 +18,7 @@ jobs:
         id: python
         with:
           python-version: 3.x
+          cache: "pip"
 
       - name: 📦 Install dependencies
         run:  python3 -m pip install setuptools wheel twine
