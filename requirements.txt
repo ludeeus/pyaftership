@@ -3,5 +3,5 @@ isort
 aiohttp>=3.6.1,<4.0
 aresponses==2.1.6
 pytest==7.4.2
-pytest-cov==4.0.0
+pytest-cov==4.1.0
 pytest-asyncio>=0.10.0
