@@ -1,5 +1,5 @@
-black==24.4.2
-isort==5.13.2
+black
+isort
 aiohttp>=3.6.1,<4.0
 aresponses==3.0.0
 pytest==7.4.3
