@@ -1,4 +1,5 @@
 """Test detect couriers."""
+
 import aiohttp
 import pytest
 

@@ -1,4 +1,5 @@
 """Common helpers for tests."""
+
 import json
 import os
 

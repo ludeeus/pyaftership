@@ -1,4 +1,5 @@
 """Test add trackings."""
+
 import aiohttp
 import pytest
 
