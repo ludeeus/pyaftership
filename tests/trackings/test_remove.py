@@ -1,4 +1,5 @@
 """Test remove tracking."""
+
 import aiohttp
 import pytest
 

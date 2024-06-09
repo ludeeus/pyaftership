@@ -1,4 +1,5 @@
 """AfterShip Trackings object."""
+
 from .base import AfterShipBase
 
 
