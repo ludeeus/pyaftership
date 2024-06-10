@@ -8,9 +8,6 @@ on:
     branches:
       - main
 
-env:
-  MIN_PYTHON_VERSION: "3.12"
-
 jobs:
   lint:
     name: Lint
@@ -23,7 +20,7 @@ jobs:
         uses: actions/setup-python@v5
         id: python
         with:
-          python-version: ${{env.MIN_PYTHON_VERSION}}
+          python-version: "3.12"
           cache: "pip"
 
       - name: 📦 Install dependencies
@@ -39,7 +36,7 @@ jobs:
     strategy:
       matrix:
         python-version:
-          - "${{env.MIN_PYTHON_VERSION}}"
+          - "3.12"
     steps:
       - name: 📥 Checkout the repository
         uses: actions/checkout@v4.1.1
@@ -59,7 +56,7 @@ jobs:
         run:  scripts/test
 
       - name: 📤 Upload coverage to Codecov
-        if: ${{ matrix.python-version == env.MIN_PYTHON_VERSION }}
+        if: ${{ matrix.python-version == "3.12" }}
         run: |
           scripts/coverage
           curl -sfSL https://codecov.io/bash | bash -
