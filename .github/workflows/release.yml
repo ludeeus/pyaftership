@@ -13,11 +13,11 @@ jobs:
       - name: 📥 Checkout the repository
         uses: actions/checkout@v4.1.1
 
-      - name: 🛠 Set up Python ${{ matrix.python-version }}
+      - name: "Set up Python 3.12"
         uses: actions/setup-python@v5
         id: python
         with:
-          python-version: 3.x
+          python-version: "3.12"
           cache: "pip"
 
       - name: 📦 Install dependencies
