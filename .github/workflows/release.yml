@@ -5,6 +5,9 @@ on:
   release:
     types: ["published"]
 
+env:
+  MIN_PYTHON_VERSION: "3.12"
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -13,11 +16,11 @@ jobs:
       - name: 📥 Checkout the repository
         uses: actions/checkout@v4.1.1
 
-      - name: 🛠 Set up Python ${{ matrix.python-version }}
+      - name: 🛠 Set up Python ${{env.MIN_PYTHON_VERSION}}
         uses: actions/setup-python@v5
         id: python
         with:
-          python-version: 3.x
+          python-version: "${{env.MIN_PYTHON_VERSION}}"
           cache: "pip"
 
       - name: 📦 Install dependencies
