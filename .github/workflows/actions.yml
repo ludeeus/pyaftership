@@ -20,7 +20,7 @@ jobs:
         uses: actions/setup-python@v6
         id: python
         with:
-          python-version: "3.12"
+          python-version: "3.14"
           cache: "pip"
 
       - name: 📦 Install dependencies
@@ -36,7 +36,7 @@ jobs:
     strategy:
       matrix:
         python-version:
-          - "3.12"
+          - "3.14"
     steps:
       - name: 📥 Checkout the repository
         uses: actions/checkout@v5.0.0
@@ -56,7 +56,7 @@ jobs:
         run:  scripts/test
 
       - name: 📤 Upload coverage to Codecov
-        if: ${{ matrix.python-version == '3.12' }}
+        if: ${{ matrix.python-version == '3.14' }}
         run: |
           scripts/coverage
           curl -sfSL https://codecov.io/bash | bash -
